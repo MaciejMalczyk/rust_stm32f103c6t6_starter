@@ -1,0 +1,20 @@
+[package]
+name = "rust_stm32f103c6t6_starter"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cargo-run-script = "0.2.0"
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.5"
+embedded-hal = "1.0.0"
+nb = "1.1.0"
+panic-halt = "1.0.0"
+stm32f1xx-hal = { version = "0.10.0", features = ["medium", "rt", "stm32f103"] }
+
+[package.metadata.scripts]
+build = "cargo build --release && arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/${PWD##*/} ${PWD##*/}.bin"
+
+flash = "stm32flash -w ${PWD##*/}.bin /dev/ttyUSB0"
+
+x = "echo ${PWD##*/}"

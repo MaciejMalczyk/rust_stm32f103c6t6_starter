@@ -1,14 +1,30 @@
 # Rust stm32f103c6t6 starter
 Preconfigured package with scripts to develop stm32f103c6t6 Blue Pill microcontroller with serial adapter.
 
-## Usage
-To flash use:
+## Prerequisites
+
+Linux c:
+
+Install stm32flash:
+
 https://sourceforge.net/p/stm32flash/wiki/Home/
-or install it from your package manager, f. e. "apt install stm32flash".
 
-To build type: cargo run-script build. This will generate binary file in the root of the crate.
+or (on debian) ``` apt install stm32flash ```
 
-To flash: set BOOT0 to 1, reset, and then type: cargo run-script flash [serial port]. Next swap BOOT0 jumper to 0 and reset.
+Install cargo-make:
+``` cargo install cargo-make ```
+
+Install rust thumbv7m-none-eabi target:
+``` rustup target install thumbv7m-none-eabi ```
+
+## Usage
+Build and flash: ``` cargo make deploy [serialport] ```
+
+Only build: ``` cargo make build-release ``` and  ``` cargo make build-objcopy ```
+
+Only flash: ``` cargo make flash [serialport] ```
+
+Rememeber to set BOOT 0 jumper to 1 and reset. After flash set jumper to O and reset.
 
 ## Credits
 Code in src taken from:

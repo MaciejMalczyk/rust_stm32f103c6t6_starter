@@ -14,6 +14,6 @@ stm32f1xx-hal = { version = "0.10.0", features = ["medium", "rt", "stm32f103"] }
 [package.metadata.scripts]
 build = "cargo build --release && arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/${PWD##*/} ${PWD##*/}.bin"
 
-flash = "stm32flash -w ${PWD##*/}.bin /dev/ttyUSB0"
+flash = "stm32flash -w ${PWD##*/}.bin $1"
 
 x = "echo ${PWD##*/}"

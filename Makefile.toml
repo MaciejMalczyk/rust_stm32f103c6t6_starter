@@ -1,0 +1,21 @@
+[tasks.build-release]
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.build-objcopy]
+script = '''
+arm-none-eabi-objcopy -O binary target/thumbv7m-none-eabi/release/${PWD##*/} ${PWD##*/}.bin
+'''
+
+[tasks.flash]
+script = '''
+stm32flash -w ${PWD##*/}.bin $1
+'''
+
+[tasks.deploy]
+dependencies = [
+	"build-release",
+	"build-objcopy",
+	"flash"
+]
+
